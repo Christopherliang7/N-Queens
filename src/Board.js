@@ -3,7 +3,8 @@
 // The only portions you need to work on are the helper functions (below)
 
 (function() {
-
+  // Subclassing
+  // Model - model view controller - data layer of our application - allows us to model our function
   window.Board = Backbone.Model.extend({
 
     initialize: function (params) {
@@ -62,14 +63,15 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
     \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
     |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
+    */
 
- */
+
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
@@ -79,12 +81,34 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // check whether sum of pieces in row are greater than 1
+      // set count to 0
+      // iterate over row
+      // add number to count
+      // if count is greater than 1, return true
+      // else, false
+      var row = this.rows()[rowIndex];
+      var count = 0;
+      for (var col = 0; col < row.length; col++) {
+        count += row[col];
+        if (count > 1) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // iterate through rows
+      // if row does not have conflicts, return true
+      // else false
+      for (var i = 0; i < this.rows().length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -94,12 +118,32 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // set count to 0
+      // iterate rows
+      // add values from each colIndex of each row
+      // if count is greater than 1, return true
+      var board = this.rows();
+      var count = 0;
+      for (var i = 0; i < board.length; i++) {
+        count += board[i][colIndex];
+        if (count > 1) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // iterate through columns
+      // if column contains conflicts return true
+      var board = this.rows();
+      for (var i = 0; i < board.length; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -109,12 +153,13 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      return false;
     },
 
 
@@ -124,12 +169,12 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
